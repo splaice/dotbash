@@ -1,0 +1,7 @@
+# ~/.bash_path
+
+if [[ "$UNAME" == "Darwin" ]] ; then
+    export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
+elif [[ "$UNAME" == "Linux" ]] ; then
+    export PATH=$HOME/bin:$PATH
+fi
