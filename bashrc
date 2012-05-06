@@ -37,16 +37,20 @@ if [ -f ~/.bash/aliases ]; then
     source  ~/.bash/aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-    # bash completion settings (actually, these are readline settings)
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
     bind "set completion-ignore-case on" # note: bind is used instead of setting these in .inputrc.
                                          # This ignores case in bash completion
     bind "set bell-style none"           # No bell, because it's damn annoying
     bind "set show-all-if-ambiguous On"  # this allows you to automatically show completion without
+
+elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+    bind "set completion-ignore-case on" # note: bind is used instead of setting these in .inputrc.
+                                         # This ignores case in bash completion
+    bind "set bell-style none"           # No bell, because it's damn annoying
+    bind "set show-all-if-ambiguous On"  # this allows you to automatically show completion without
+
 fi
 
 # local definitions.
