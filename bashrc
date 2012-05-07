@@ -5,9 +5,16 @@ if [[ "$UNAME" == "Darwin" ]] ; then
 	export CLICOLOR=1
 fi
 
-# editor defaults
-export VISUAL=vi
-export EDITOR=vi
+if [[ "$UNAME" == "Darwin" ]] ; then
+    # editor defaults
+    export VISUAL=/usr/local/bin/vim
+    export EDITOR=/usr/local/bin/vim
+else
+    # editor defaults
+    export VISUAL=vi
+    export EDITOR=vi
+fi
+
 export PAGER=less
 
 # don't put duplicate lines in the history. See bash(1) for more options
