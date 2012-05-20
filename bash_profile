@@ -13,4 +13,6 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # Initialize the 'hop' script
-source /Users/splaice/.virtualenvs/default/hop/hop.bash
+if [ -f '/Users/splaice/.virtualenvs/default/hop/hop.bash' ] ; then
+    source /Users/splaice/.virtualenvs/default/hop/hop.bash
+fi

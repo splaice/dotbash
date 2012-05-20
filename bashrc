@@ -44,7 +44,7 @@ if [ -f ~/.bash/aliases ]; then
     source  ~/.bash/aliases
 fi
 
-if [ -f `brew --prefix`/etc/bash_completion ]; then
+if [[ -f '/usr/local/bin/brew' && -f `brew --prefix`/etc/bash_completion ]]; then
     . `brew --prefix`/etc/bash_completion
     bind "set completion-ignore-case on" # note: bind is used instead of setting these in .inputrc.
                                          # This ignores case in bash completion
