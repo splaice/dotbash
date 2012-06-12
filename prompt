@@ -64,12 +64,24 @@ function git_prompt() {
 
 # simple prompt
 function simple_prompt() {
+    local scm=""
+    local changes=$txtgrn
+    local branch=""
+    if git status &> /dev/null; then
+        branch="$(git branch --no-color | grep '^* .*' | cut -d' ' -f 2)"
+        if git status -s | grep -q '^[[:space:]][MA] '; then
+            changes=$txtred
+        fi
+        scm=" on ${changes}\]${branch} ${txtrst}\]"
+    fi
+
     # export PS1
     PROMPT="${txtpur}\]\u"
     PROMPT="${PROMPT}${txtwht} at "
     PROMPT="${PROMPT}${txtpur}\]\h"
     PROMPT="${PROMPT}${txtwht} in "
     PROMPT="${PROMPT}${txtpur}\]\w"
+    PROMPT="${PROMPT}${txtwht}${scm}"
     PROMPT="${PROMPT}${txtrst}\]\n"
     PROMPT="${PROMPT}\$ "
     PS1=$PROMPT
