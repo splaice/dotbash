@@ -21,3 +21,5 @@ if [[ "$UNAME" == "Linux" ]] ; then
 fi
 
 alias l='ls -l'
+
+alias mtr='mtr --curses'
