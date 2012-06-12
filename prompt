@@ -65,8 +65,11 @@ function git_prompt() {
 # simple prompt
 function simple_prompt() {
     # export PS1
-    PROMPT="${txtwht}${bakpur}"
-    PROMPT="${PROMPT}\]@\h \w"
+    PROMPT="${txtpur}\]\u"
+    PROMPT="${PROMPT}${txtwht} at "
+    PROMPT="${PROMPT}${txtpur}\]\h"
+    PROMPT="${PROMPT}${txtwht} in "
+    PROMPT="${PROMPT}${txtpur}\]\w"
     PROMPT="${PROMPT}${txtrst}\]\n"
     PROMPT="${PROMPT}\$ "
     PS1=$PROMPT
