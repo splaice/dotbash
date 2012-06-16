@@ -38,30 +38,6 @@ bakcyn='\e[46m'   # Cyan
 bakwht='\e[47m'   # White
 txtrst='\e[0m'    # Text Reset
 
-# fancy git prompt that i dont like
-function git_prompt() {
-  local scm=""
-  local changes=$txtblk$bakwht
-  local branch=""
-  # check for git
-  if git status &> /dev/null; then
-    branch="$(git branch --no-color | head -1 | cut -d' ' -f 2)"
-    if git status -s | grep -q '^[[:space:]][MA] '; then
-      changes=$txtblk$bakred
-    fi
-    scm="${changes}\] ${branch} ${txtrst}\]"
-  fi
-
-  # export PS1
-  PS1=''"${HOST_COLOUR}"'\]\u@\h'"${txtrst}"'\]'"${scm}"' '"${txtwht}"'\]\w'"${txtrst}"'\]\n\$ '
-
-  # set the title
-  case "$TERM" in
-  xterm*|rxvt*)
-    echo -ne "\033]0;${USER}@$(hostname -s): ${PWD/$HOME/~}\007" ;;
-  esac
-}
-
 # simple prompt
 function simple_prompt() {
     local scm=""
@@ -78,11 +54,11 @@ function simple_prompt() {
     fi
 
     # export PS1
-    PROMPT="${txtpur}\]\u"
+    PROMPT="${BASE_COLOR}\]\u"
     PROMPT="${PROMPT}${txtwht} at "
-    PROMPT="${PROMPT}${txtpur}\]\h"
+    PROMPT="${PROMPT}${BASE_COLOR}\]\h"
     PROMPT="${PROMPT}${txtwht} in "
-    PROMPT="${PROMPT}${txtpur}\]\w"
+    PROMPT="${PROMPT}${BASE_COLOR}\]\w"
     PROMPT="${PROMPT}${txtwht}${scm}"
     PROMPT="${PROMPT}${txtrst}\]\n"
     PROMPT="${PROMPT}\$ "
@@ -95,24 +71,10 @@ function simple_prompt() {
     esac
 }
 
-# simple remote prompt
-function remote_prompt() {
-    # export PS1
-    PROMPT="${txtwht}${bakred}"
-    PROMPT="${PROMPT}\]@\h \w"
-    PROMPT="${PROMPT}${txtrst}\]\n"
-    PROMPT="${PROMPT}\$ "
-    PS1=$PROMPT
-
-    # set the title
-    case "$TERM" in
-    xterm*|rxvt*)
-        echo -ne "\033]0;${USER}@$(hostname -s): ${PWD/$HOME/~}\007" ;;
-    esac
-}
-
 if [[ "$REMOTE" -eq "1" ]] ; then
-    PROMPT_COMMAND=remote_prompt
+    BASE_COLOR=$bakpur
+    PROMPT_COMMAND=simple_prompt
 else
+    BASE_COLOR=$txtpur
     PROMPT_COMMAND=simple_prompt
 fi
