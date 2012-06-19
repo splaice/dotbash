@@ -69,8 +69,10 @@ function simple_prompt() {
     local branch=""
     if git status &> /dev/null; then
         branch="$(git branch --no-color | grep '^* .*' | cut -d' ' -f 2)"
-        if git status -s | grep -q '^[[:space:]][MA] '; then
+        if git status | egrep  -q '^(# Changes not staged for commit||# Changes to be committed):'; then
             changes=$txtred
+        elif git status 2>&1 | grep  -q '^# Your branch is ahead of '; then
+            changes=$txtylw
         fi
         scm=" on ${changes}\]${branch} ${txtrst}\]"
     fi
