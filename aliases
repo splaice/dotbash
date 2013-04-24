@@ -23,3 +23,5 @@ fi
 alias l='ls -l'
 
 alias mtr='mtr --curses'
+
+alias postal='cd ~/postmates/postal-main/p/main/core && mvim'
