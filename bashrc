@@ -44,6 +44,14 @@ if [ -f ~/.bash/aliases ]; then
     source  ~/.bash/aliases
 fi
 
+if [ -f '/home/splaice/src/google-cloud-sdk/completion.bash.inc' ] ; then
+    source /home/splaice/src/google-cloud-sdk/completion.bash.inc
+fi
+
+if [ -f '/home/splaice/src/google-cloud-sdk/path.bash.inc' ] ; then
+    source /home/splaice/src/google-cloud-sdk/path.bash.inc
+fi
+
 if [[ -f '/usr/local/bin/brew' && -f `brew --prefix`/etc/bash_completion ]]; then
     . `brew --prefix`/etc/bash_completion
     bind "set completion-ignore-case on" # note: bind is used instead of setting these in .inputrc.
